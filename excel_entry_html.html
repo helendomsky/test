@@ -1,0 +1,65 @@
+
+
+<!--Following the examples from: https://www.techotopia.com/index.php/Building_Forms_with_JavaScript *and* https://developer.mozilla.org/en-US/docs/Learn/Forms/Your_first_form-->
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+
+   	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  	<script src="handle_hidden.js"></script>
+
+
+  </head>
+
+  <body>
+
+  	<meta charset="utf-8">
+  	<title>Bottle Assay Excel File</title>
+
+    <form name="excel_filler" method="post" action="#">
+    	<ul>
+    		<p>Are you...<br></p>
+    		<div id="oldck">
+    			<label for="checker">Accessing an existing .xlsx file?</label>
+  				<input type="checkbox" id="checker" name="oldck">
+
+  			</div> 
+
+    		<div id="hiddenbit">
+    			<label for="filename">File Location: </label>
+  				<input type="file" id="filename" name="hidden">
+  			</div>	
+
+  			<div id="newck">
+  				<br>
+    			<label for="checker">Creating a new file?</label>
+  				<input type="checkbox" id="checker" name="newck">
+
+  			</div>
+
+    		<div id="hiddenbit2">
+    			<label for="newfilename">New Filename: </label>
+  				<input type="text" id="newfilename" name="newfile2">
+  			</div>
+
+  			<div id="today">
+  				<label for="date">Date:</label>
+  				<input type="date" id="date" name="datefill">
+  			</div>
+
+    		<div>
+  				<input type="submit" value="ENTER">
+  			</div>
+
+    	</ul>
+	<!-- Form Objects go here -->
+
+	</form>
+
+
+
+  </body>
+</html>
+
+
