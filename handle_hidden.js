@@ -2,18 +2,8 @@ $(function() {
   
   var checkbox = $("#checker");
   var hidden = $("#hiddenbit");
- // var datefill = $("#today")
- 
-  var today = new Date();
-  var month_num = today.getMonth();
-  var day_num = today.getDate();
-  var year_num = today.getFullYear();
- 
-  var full_date = day_num+"-"+month_num+"-"+year_num;
- 
-  let datefill = new Date();
-  //console.log(full_date)
 
+//this is the important part:
   hidden.hide();
   
   
@@ -26,4 +16,47 @@ $(function() {
       hidden.hide();
     }
   });
+
+  var checkbox2 = $("#checker2");
+  var hidden2 = $("#hiddenbit2");
+
+//this is the important part:
+  hidden2.hide();
+  
+  
+  checkbox2.change(function() {
+    if (checkbox2.is(':checked')) {
+      hidden2.show();
+      //datefill.val(full_date);
+    
+    } else {
+      hidden2.hide();
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+ // var datefill = $("#today")
+ 
+  
+//currently this bit doesn't do anything...
+  var today = new Date();
+  var month_num = today.getMonth();
+  var day_num = today.getDate();
+  var year_num = today.getFullYear();
+ 
+  var full_date = day_num+"-"+month_num+"-"+year_num;
+ 
+  //let datefill = new Date().toISOString().substr(0, 10);
+  //document.querySelector("#today").value = today;
+  //console.log(full_date)
+  //let today = new Date().toISOString().substr(0, 10);
+  //document.querySelector("#today").value = today;
 });
