@@ -2,11 +2,12 @@ $(function() {
   
   var checkbox = $("#checker");
   var hidden = $("#hiddenbit");
+//  var test = prompt("Whyyy","sdfsdf");
 
 //this is the important part:
   hidden.hide();
   
-  
+
   checkbox.change(function() {
     if (checkbox.is(':checked')) {
       hidden.show();
@@ -32,7 +33,24 @@ $(function() {
     } else {
       hidden2.hide();
     }
+
   });
+
+  //**************************************************************
+
+
+  var alive = $("#vol");
+
+  alive.on("mousemove",function(){
+ // alive.(function() {
+   let numalive = alive.val();
+   let numdead = 10-numalive;
+   console.log("Alive insects: "+numalive+" Dead insects: "+numdead);
+   document.getElementById("numalive").value = numalive;
+   document.getElementById("numdead").value = numdead;
+
+  });
+
 
 
 

@@ -5,9 +5,11 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-
+  	
+  	<script src="http://cdn.jsdelivr.net/alasql/0.3/alasql.min.js"></script>
    	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   	<script src="handle_hidden.js"></script>
+
 
 
   </head>
@@ -48,9 +50,28 @@
   				<input type="date" id="date" name="datefill">
   			</div>
 
+  			<div id="slider">
+  				<label for="vol">Mortality:</label>
+  				<input type="range" id="vol" name="vol" min="0" max="10">
+  			</div>
+
+
+  			<div><label for="numalive">Live: </label><input type="text" id="numalive"></div>
+  			<div><label for="numdead">Dead: </label><input type="text" id="numdead"></div>
+
+
     		<div>
   				<input type="submit" value="ENTER">
   			</div>
+
+  			<div>
+  				<input type="button" value="Preview Submission" onclick="preview()">
+  			</div>
+
+  			<div>
+  				<br><br><br><button onclick="window.print()">Print this page</button>
+  			</div>
+
 
     	</ul>
 	<!-- Form Objects go here -->
