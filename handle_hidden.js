@@ -6,7 +6,6 @@ $(function() {
 
 //this is the important part:
   hidden.hide();
-  
 
   checkbox.change(function() {
     if (checkbox.is(':checked')) {
@@ -21,9 +20,8 @@ $(function() {
   var checkbox2 = $("#checker2");
   var hidden2 = $("#hiddenbit2");
 
-//this is the important part:
+//this is the second important part:
   hidden2.hide();
-  
   
   checkbox2.change(function() {
     if (checkbox2.is(':checked')) {
@@ -38,22 +36,29 @@ $(function() {
 
   //**************************************************************
 
-
-  var alive = $("#vol");
+  var alive = $("#mortality");
 
   alive.on("mousemove",function(){
  // alive.(function() {
+ //makes the slider return a dead and alive ratio
    let numalive = alive.val();
    let numdead = 10-numalive;
-   console.log("Alive insects: "+numalive+" Dead insects: "+numdead);
+   //Debug:
+   //console.log("Alive insects: "+numalive+" Dead insects: "+numdead);
    document.getElementById("numalive").value = numalive;
    document.getElementById("numdead").value = numdead;
 
+// eventually should add where you can enter the live/dead and it autocalculates from the text box
+
+
+  //**************************************************************
+
+  var mort_max = $("#bottlepop");
+  console.log(mort_max.val());
+  mort_max.click(function() {
+    document.getElementById("mortality").value = mort_max.val();
+
   });
-
-
-
-
 
 
 
