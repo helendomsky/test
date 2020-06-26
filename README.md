@@ -1,7 +1,7 @@
 # test
 My first project
 
-![](UI demo 1.gif)
+![](UI%20demo%201.gif)
 
 How to use:
 
