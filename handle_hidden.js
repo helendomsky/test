@@ -34,7 +34,7 @@ $(function() {
 
   });
 
-  //**************************************************************
+//**************************************************************
 
 
   var alive_dead = $("#mortality");
@@ -47,7 +47,8 @@ $(function() {
   //var numalive = alive_dead.val();
   //var numdead = document.getElementById("mortality").max-numalive;
   
-//**********************************
+//**************************************************************
+
   var mort_stats = $("#mort_stats");
   
   mort_stats.hide();
@@ -59,8 +60,7 @@ $(function() {
 
   });
 
-//**********************************
-
+//**************************************************************
 
   alive_dead.on("mousemove",function(){
  // alive.(function() {
@@ -72,7 +72,8 @@ $(function() {
    document.getElementById("numalive").value = numalive;
    document.getElementById("numdead").value = numdead;
   });
-  //**************************************************************
+
+//**************************************************************
 
   // now you can enter the live/dead and it autocalculates from the text box
   Live.change(function() {
@@ -87,7 +88,31 @@ $(function() {
     document.getElementById("numalive").value = mort_max.val()-Dead.val();
   });
 
-  //**************************************************************
+//**************************************************************
+  
+  var see_stats = $("#see_stats");
+  var stat_info = $("#stat_info");
+  var stat_info2 = document.getElementById("stat_info");
+
+  stat_info.hide();
+  see_stats.on("click",function() {
+    //jquery
+    var stat_calc = (numdead.value / mort_max.val()*100)+"% Mortality"
+    stat_info.text(stat_calc);
+    //native javascript
+   // stat_info2.innerHTML = stat_calc;
+   //jquery
+   stat_info.show();
+
+  });
+
+//**************************************************************
+
+
+
+
+
+
 
 
  // var datefill = $("#today")
