@@ -2,9 +2,9 @@ $(function() {
   
   var checkbox = $("#checker");
   var hidden = $("#hiddenbit");
-//  var test = prompt("Whyyy","sdfsdf");
+  //  var test = prompt("Whyyy","sdfsdf");
 
-//this is the important part:
+  //this is the important part:
   hidden.hide();
 
   checkbox.change(function() {
@@ -20,7 +20,7 @@ $(function() {
   var checkbox2 = $("#checker2");
   var hidden2 = $("#hiddenbit2");
 
-//this is the second important part:
+  //this is the second important part:
   hidden2.hide();
   
   checkbox2.change(function() {
@@ -36,27 +36,51 @@ $(function() {
 
   //**************************************************************
 
-  var alive = $("#mortality");
 
-  alive.on("mousemove",function(){
+  var alive_dead = $("#mortality");
+  var Live = $("#numalive");
+  var Dead = $("#numdead");
+
+
+ //makes the slider return a dead and alive ratio
+  //var numalive = alive_dead.val();
+  //var numdead = document.getElementById("mortality").max-numalive;
+
+
+
+  alive_dead.on("mousemove",function(){
  // alive.(function() {
  //makes the slider return a dead and alive ratio
-   let numalive = alive.val();
-   let numdead = 10-numalive;
+  var numalive = alive_dead.val();
+  var numdead = document.getElementById("mortality").max-numalive;
    //Debug:
    //console.log("Alive insects: "+numalive+" Dead insects: "+numdead);
    document.getElementById("numalive").value = numalive;
    document.getElementById("numdead").value = numdead;
+  });
+  //**************************************************************
 
-// eventually should add where you can enter the live/dead and it autocalculates from the text box
+  // now you can enter the live/dead and it autocalculates from the text box
+  Live.change(function() {
+    console.log(Live.val()+"L L  D"+Dead.val())
+    document.getElementById("mortality").value = Live.val();
+    document.getElementById("numdead").value = mort_max.val()-Live.val();
+  });   //DEPENDENCIES DO NOT FUNCTION YET
 
+  Dead.change(function() {
+    console.log(Live.val()+"L  D D"+Dead.val())
+    document.getElementById("mortality").value = mort_max.val()-Dead.val();
+    document.getElementById("numalive").value = mort_max.val()-Dead.val();
+  });
 
   //**************************************************************
 
   var mort_max = $("#bottlepop");
   console.log(mort_max.val());
   mort_max.click(function() {
-    document.getElementById("mortality").value = mort_max.val();
+    document.getElementById("mortality").max = mort_max.val();
+
+    //document.getElementById("mortality").max = mort_max.val();
 
   });
 
@@ -69,7 +93,7 @@ $(function() {
  // var datefill = $("#today")
  
   
-//currently this bit doesn't do anything...
+  //currently this bit doesn't do anything...
   var today = new Date();
   var month_num = today.getMonth();
   var day_num = today.getDate();
