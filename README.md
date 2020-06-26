@@ -1,6 +1,8 @@
 # test
 My first project
 
+![](UI demo 1.gif)
+
 How to use:
 
 1. Click the green Clone button above, and download the .zip file
