@@ -47,26 +47,30 @@
   				<label for="date">Date:</label>
   				<input type="date" id="date" name="datefill">
   			</div>
+  			
+  			<br><br>
 
   			<div>
   				<label for="bottlepop">Mosquitoes in Bottle: </label>
   				<input type="number" id="bottlepop" name="totalM" min=1>
   			</div>
 
+  			<br>
 
-  			<div id="slider">
-  				<label for="mortality">Mortality:</label>
-  				<input type="range" id="mortality" name="mort" min="0" max="10">
-  			</div>
+  			<div id = "mort_stats">
+	  			<div id="slider">
+	  				<label for="mortality">Mortality:</label>
+	  				<input type="range" id="mortality" name="mort" min="0" max="10">
+	  			</div>
+
+	  			<div><label for="numalive">Live: </label><input type="number" id="numalive" min="0"></div>
+	  			<div><label for="numdead">Dead: </label><input type="number" id="numdead" min="0"></div>
 
 
-  			<div><label for="numalive">Live: </label><input type="number" id="numalive"></div>
-  			<div><label for="numdead">Dead: </label><input type="number" id="numdead"></div>
-
-
-    		<div>
-  				<input type="submit" value="ENTER">
-  			</div>
+	    		<div>
+	  				<input type="submit" value="ENTER">
+	  			</div>
+	  		</div>
 
   			<div>
   				<input type="button" value="Preview Submission" onclick="preview()">

@@ -40,12 +40,26 @@ $(function() {
   var alive_dead = $("#mortality");
   var Live = $("#numalive");
   var Dead = $("#numdead");
+  var mort_max = $("#bottlepop");
 
 
  //makes the slider return a dead and alive ratio
   //var numalive = alive_dead.val();
   //var numdead = document.getElementById("mortality").max-numalive;
+  
+//**********************************
+  var mort_stats = $("#mort_stats");
+  
+  mort_stats.hide();
 
+  mort_max.on("keydown change",function(e) {
+    mort_stats.show();
+    document.getElementById("mortality").max = mort_max.val();
+    console.log(e);
+
+  });
+
+//**********************************
 
 
   alive_dead.on("mousemove",function(){
@@ -65,7 +79,7 @@ $(function() {
     console.log(Live.val()+"L L  D"+Dead.val())
     document.getElementById("mortality").value = Live.val();
     document.getElementById("numdead").value = mort_max.val()-Live.val();
-  });   //DEPENDENCIES DO NOT FUNCTION YET
+  });   
 
   Dead.change(function() {
     console.log(Live.val()+"L  D D"+Dead.val())
@@ -74,20 +88,6 @@ $(function() {
   });
 
   //**************************************************************
-
-  var mort_max = $("#bottlepop");
-  console.log(mort_max.val());
-  mort_max.click(function() {
-    document.getElementById("mortality").max = mort_max.val();
-
-    //document.getElementById("mortality").max = mort_max.val();
-
-  });
-
-
-
-
-
 
 
  // var datefill = $("#today")
