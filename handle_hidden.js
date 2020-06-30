@@ -1,134 +1,148 @@
+
+  //var alive_dead = $("#mortslider");
+  //var Live = $("#numalive");
+  //var Dead = $("#numdead");
+
 $(function() {
+
+  showOnChange("#checker","#hiddenbit");
+  showOnChange("#checker2","#hiddenbit2");
+  showOnKeydown("#bottlepop","#mort_stats","#mortslider")
+  handleRatios("#mortslider","#numalive","#numdead")
+  handleRatiosfromText("#mortslider","#numalive","#numdead")
+  showOnChange("#see_stats","#stat_info")
+  calcPct("#see_stats","#numdead","#mortslider","#stat_info")
+  //openXLSX()
+
+  //setVars();
+  //setSlider();
+
+//**************************************************************
+//****************INDIVIDUAL FUNCTIONS BEGIN HERE***************
+//**************************************************************
+
+// Migrating native to JQuery for readability
+// if too slow, then native is better?
+
+//**************************************************************
+function showOnChange(checkbox,hidden){  
+  //toggle hide/show on change in state of a checkbox
   
-  var checkbox = $("#checker");
-  var hidden = $("#hiddenbit");
-  //  var test = prompt("Whyyy","sdfsdf");
+  var ck = $(checkbox);
+  var hd = $(hidden);  
 
-  //this is the important part:
-  hidden.hide();
+  hd.hide();
 
-  checkbox.change(function() {
-    if (checkbox.is(':checked')) {
-      hidden.show();
-      //datefill.val(full_date);
-    
+  ck.change(function() {
+    if (ck.is(':checked')) {
+      hd.show();
+
     } else {
-      hidden.hide();
+      hd.hide();
     }
   });
+};
+//**************************************************************
+function showOnKeydown(inText,hidden,slider){
+  //shows item on keydown and assigns the bottle population to
+  //the max slider value
+  var txt = $(inText)
+  var hd = $(hidden)
+  var mort = $(slider)
 
-  var checkbox2 = $("#checker2");
-  var hidden2 = $("#hiddenbit2");
+  hd.hide();
 
-  //this is the second important part:
-  hidden2.hide();
-  
-  checkbox2.change(function() {
-    if (checkbox2.is(':checked')) {
-      hidden2.show();
-      //datefill.val(full_date);
-    
-    } else {
-      hidden2.hide();
-    }
-
+    txt.on("keydown change",function() {
+      hd.show();
+      //document.getElementById("mortality").max = txt.val();
+      mort.attr("max",txt.val());
   });
-
+};
 //**************************************************************
+function handleRatios(slider,live,dead){
+  //sets slider positon from click and drag, function uses mouse
+  //move so that the numbers update constantly.
+  //sets intial values for live and dead text-boxes
+  var mort = $(slider);
+  var numalive = $(live);
+  var numdead = $(dead);
 
-
-  var alive_dead = $("#mortality");
-  var Live = $("#numalive");
-  var Dead = $("#numdead");
-  var mort_max = $("#bottlepop");
-
-
- //makes the slider return a dead and alive ratio
-  //var numalive = alive_dead.val();
-  //var numdead = document.getElementById("mortality").max-numalive;
-  
-//**************************************************************
-
-  var mort_stats = $("#mort_stats");
-  
-  mort_stats.hide();
-
-  mort_max.on("keydown change",function(e) {
-    mort_stats.show();
-    document.getElementById("mortality").max = mort_max.val();
-    console.log(e);
-
+  mort.on("mousemove",function(){
+    numalive.val(mort.val());
+    numdead.val(mort.attr("max")-numalive.val());
   });
-
+};
 //**************************************************************
+function handleRatiosfromText(slider,live,dead){
+  //now you can edit the numbers in the dead and live textboxes,
+  //which will change the slider position and value of the other
+  //text box(es)
+  var mort = $(slider);
+  var numalive = $(live);
+  var numdead = $(dead);
 
-  alive_dead.on("mousemove",function(){
- // alive.(function() {
- //makes the slider return a dead and alive ratio
-  var numalive = alive_dead.val();
-  var numdead = document.getElementById("mortality").max-numalive;
-   //Debug:
-   //console.log("Alive insects: "+numalive+" Dead insects: "+numdead);
-   document.getElementById("numalive").value = numalive;
-   document.getElementById("numdead").value = numdead;
+  numalive.change(function(){
+    mort.val(numalive.val());
+    numdead.val(mort.attr("max")-numalive.val());
   });
-
-//**************************************************************
-
-  // now you can enter the live/dead and it autocalculates from the text box
-  Live.change(function() {
-    console.log(Live.val()+"L L  D"+Dead.val())
-    document.getElementById("mortality").value = Live.val();
-    document.getElementById("numdead").value = mort_max.val()-Live.val();
-  });   
-
-  Dead.change(function() {
-    console.log(Live.val()+"L  D D"+Dead.val())
-    document.getElementById("mortality").value = mort_max.val()-Dead.val();
-    document.getElementById("numalive").value = mort_max.val()-Dead.val();
+  numdead.change(function(){
+    mort.val(mort.attr("max")-numdead.val());
+    numalive.val(mort.attr("max")-numdead.val());
   });
-
+};
 //**************************************************************
-  
-  var see_stats = $("#see_stats");
-  var stat_info = $("#stat_info");
-  var stat_info2 = document.getElementById("stat_info");
+function calcPct(trigger,subset,total,output){
+  //showing the mortality % calculated from dead and alive insects
+  //can add other statistics/math if needed 
+  var tr = $(trigger)
+  var sub = $(subset)
+  var tot = $(total)
+  var otpt = $(output)
 
-  stat_info.hide();
-  see_stats.on("click",function() {
-    //jquery
-    var stat_calc = (numdead.value / mort_max.val()*100)+"% Mortality"
-    stat_info.text(stat_calc);
-    //native javascript
-   // stat_info2.innerHTML = stat_calc;
-   //jquery
-   stat_info.show();
 
+  tr.on("click",function(){
+    otpt.text(Math.round((sub.val()/tot.attr("max"))*100)+"% "+tot.attr("name"))
+    console.log(otpt.text())
   });
-
+};
 //**************************************************************
-
-
-
-
-
-
-
-
- // var datefill = $("#today")
+//function openXLSX()
  
-  
-  //currently this bit doesn't do anything...
-  var today = new Date();
-  var month_num = today.getMonth();
-  var day_num = today.getDate();
-  var year_num = today.getFullYear();
- 
-  var full_date = day_num+"-"+month_num+"-"+year_num;
- 
-  //let datefill = new Date().toISOString().substr(0, 10);
-  //document.querySelector("#today").value = today;
-  //console.log(full_date)
-  //let today = new Date().toISOString().substr(0, 10);
-  //document.querySelector("#today").value = today;
+
+
+//**************************************************************
+//github.com/SheetJS/sheetjs tutorials and examples
+//opening a spreadsheet as an object
+//spreadsheet is visible in console, but I haven't gotten to
+//viewing or editing it yet
+
+var file_opener = $("#filename");
+var workbook = undefined;
+
+file_opener.change(function handleFile(e) {
+  var files = e.target.files, f = files[0];
+  var reader = new FileReader();
+  var workbook;
+  reader.onload = function(e) {
+    var data = new Uint8Array(e.target.result);
+    workbook = XLSX.read(data, {type: 'array'});
+    console.log("onload");
+    console.log(workbook);
+    /* DO SOMETHING WITH workbook HERE */
+   // dostuff(workbook);*****
+  //things can only run inside of the reader.onload to wait until the excel
+  //file is fully loaded up, so hide some stuff in here...
+  };
+  console.log("change");
+  console.log(workbook);
+  setTimeout(function(){
+    workbook
+  },2000);
+  reader.readAsArrayBuffer(f);
 });
+//input_dom_element.addEventListener('change', handleFile, false);
+
+});
+
+
+
