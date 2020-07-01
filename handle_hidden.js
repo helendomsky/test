@@ -16,7 +16,8 @@ $(function() {
 
 
   readXLSX("#oldfilename")
-  //writeXLSX2("","","")
+
+  writeXLSX2("#enter_filename","#newfilename","#installation")
 
   showAddEntry("#addentrybutton","#entry_info")
 
@@ -72,7 +73,7 @@ function showAddEntry(enterButton,output){
   btn.on("click",function(){
     otpt.text("Entry no. "+int+" has been added");
     int++
-    console.log(otpt.text());
+    //console.log(otpt.text());
   });
 };
 //**************************************************************
@@ -119,7 +120,7 @@ function calcPct(trigger,subset,total,output){
 
   tr.on("click",function(){
     otpt.text(Math.round((sub.val()/tot.attr("max"))*100)+"% "+tot.attr("name"));
-    console.log(otpt.text());
+    //console.log(otpt.text());
   });
 };
 //**************************************************************
@@ -184,13 +185,25 @@ function writeXLSX1(enterButton,newFile){
   var ws = XLSX.utils.aoa_to_sheet(aoa);
 };
 //***************************************************
-function writeXLSX2(enterButton,newFile,inst){
-  //single line
+function writeXLSX2(createNewButton,newFileName,instName){
+  //single line, all labels
+  var create = $(createNewButton)
+
+create.on("click",function(){ 
   
+  var wb_name = $(newFileName)
+  var sh_name = $(instName)
+
+  
+
   var wb = {
-      SheetNames: ["mySheet"],
-      Sheets: {
-          mySheet: {
+      SheetNames: [sh_name.val()],
+      Sheets: {}
+  }
+  var obj = wb.Sheets;
+  var prop_name = sh_name.val();
+
+  obj[prop_name] = {
               "!ref":"A1:Y1",
               A1: { t:"s", v:"Installation" },
               B1: { t:"s", v:"Site Number" },
@@ -218,11 +231,9 @@ function writeXLSX2(enterButton,newFile,inst){
               X1: { t:"s", v:"T120 Alive" },
               Y1: { t:"s", v:"T120 Dead" }
 
-          }
-      }
-  }
-  XLSX.writeFile(wb, "sheetjs.xlsx");
-
+          };
+  XLSX.writeFile(wb, (wb_name.val()+".xlsx"));
+  /*
   //multiple lines
   var myObject = [];
 
@@ -235,12 +246,13 @@ function writeXLSX2(enterButton,newFile,inst){
   } 
 
   var wb = {
-      SheetNames: ["mySheet"],
+      SheetNames: [sh_name],
       Sheets: {
           mySheet: myObject
       }
   }
-  XLSX.writeFile(wb, "sheetjs.xlsx");
+  XLSX.writeFile(wb, wb_name);*/
+  });
 };
 //**************************************************************
 
