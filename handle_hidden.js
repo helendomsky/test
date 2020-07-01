@@ -138,8 +138,8 @@ function readXLSX(oldFile){
     reader.readAsArrayBuffer(f);
   });
 };
-/*
-function writeXLSX(enterButton,newFile){
+//**************************************************************
+function writeXLSX1(enterButton,newFile){
   
   var enter = $(enterButton);
   var name = $(newFile);
@@ -171,6 +171,7 @@ function writeXLSX(enterButton,newFile){
 
 function writeXLSX2(enterButton,newFile){
   //single line
+  
   var wb = {
       SheetNames: ["mySheet"],
       Sheets: {
@@ -179,7 +180,7 @@ function writeXLSX2(enterButton,newFile){
               A1: { t:"s", v:"Installation" },
               B1: { t:"s", v:"Site Number" },
               C1: { t:"s", v:"Assay Date" }
-              D1: { t:"s", v:"Genus" }
+        /*      D1: { t:"s", v:"Genus" }
               E1: { t:"s", v:"Insecticide" }
               F1: { t:"s", v:"Dose (ug)" }
               G1: { t:"s", v:"Bottle No." }
@@ -200,7 +201,7 @@ function writeXLSX2(enterButton,newFile){
               V1: { t:"s", v:"T105 Alive" }
               W1: { t:"s", v:"T105 Dead" }
               X1: { t:"s", v:"T120 Alive" }
-              Y1: { t:"s", v:"T120 Dead" }
+              Y1: { t:"s", v:"T120 Dead" }*/
 
           }
       }
@@ -230,7 +231,6 @@ function writeXLSX2(enterButton,newFile){
 //**************************************************************
 
 //input_dom_element.addEventListener('change', handleFile, false);
-*/
 });
 
 
