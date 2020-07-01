@@ -7,6 +7,7 @@ $(function() {
 
   showOnChange("#checker","#hiddenbit");
   showOnChange("#checker2","#hiddenbit2");
+  showOnChange("#add_inst_info","#installation_info")
   showOnKeydown("#bottlepop","#mort_stats","#mortslider")
   handleRatios("#mortslider","#numalive","#numdead")
   handleRatiosfromText("#mortslider","#numalive","#numdead")
@@ -15,6 +16,9 @@ $(function() {
 
 
   readXLSX("#oldfilename")
+  //writeXLSX2("","","")
+
+  showAddEntry("#addentrybutton","#entry_info")
 
   //setVars();
   //setSlider();
@@ -44,7 +48,7 @@ function showOnChange(checkbox,hidden){
     }
   });
 };
-//**************************************************************
+//***************************************************
 function showOnKeydown(inText,hidden,slider){
   //shows item on keydown and assigns the bottle population to
   //the max slider value
@@ -61,6 +65,17 @@ function showOnKeydown(inText,hidden,slider){
   });
 };
 //**************************************************************
+function showAddEntry(enterButton,output){
+  var btn = $(enterButton);
+  var otpt = $(output);
+  var int = 1
+  btn.on("click",function(){
+    otpt.text("Entry no. "+int+" has been added");
+    int++
+    console.log(otpt.text());
+  });
+};
+//**************************************************************
 function handleRatios(slider,live,dead){
   //sets slider positon from click and drag, function uses mouse
   //move so that the numbers update constantly.
@@ -74,7 +89,7 @@ function handleRatios(slider,live,dead){
     numdead.val(mort.attr("max")-numalive.val());
   });
 };
-//**************************************************************
+//***************************************************
 function handleRatiosfromText(slider,live,dead){
   //now you can edit the numbers in the dead and live textboxes,
   //which will change the slider position and value of the other
@@ -168,8 +183,8 @@ function writeXLSX1(enterButton,newFile){
   // aoa can be directly converted to a worksheet object 
   var ws = XLSX.utils.aoa_to_sheet(aoa);
 };
-
-function writeXLSX2(enterButton,newFile){
+//***************************************************
+function writeXLSX2(enterButton,newFile,inst){
   //single line
   
   var wb = {
@@ -179,29 +194,29 @@ function writeXLSX2(enterButton,newFile){
               "!ref":"A1:Y1",
               A1: { t:"s", v:"Installation" },
               B1: { t:"s", v:"Site Number" },
-              C1: { t:"s", v:"Assay Date" }
-        /*      D1: { t:"s", v:"Genus" }
-              E1: { t:"s", v:"Insecticide" }
-              F1: { t:"s", v:"Dose (ug)" }
-              G1: { t:"s", v:"Bottle No." }
-              H1: { t:"s", v:"T0 Alive" }
-              I1: { t:"s", v:"T0 Dead" }            
-              J1: { t:"s", v:"T15 Alive" }
-              K1: { t:"s", v:"T15 Dead" }
-              L1: { t:"s", v:"T30 Alive" }
-              M1: { t:"s", v:"T30 Dead" }
-              N1: { t:"s", v:"T45 Alive" }
-              O1: { t:"s", v:"T45 Dead" }
-              P1: { t:"s", v:"T60 Alive" }
-              Q1: { t:"s", v:"T60 Dead" }
-              R1: { t:"s", v:"T75 Alive" }
-              S1: { t:"s", v:"T75 Dead" }
-              T1: { t:"s", v:"T90 Alive" }
-              U1: { t:"s", v:"T90 Dead" }
-              V1: { t:"s", v:"T105 Alive" }
-              W1: { t:"s", v:"T105 Dead" }
-              X1: { t:"s", v:"T120 Alive" }
-              Y1: { t:"s", v:"T120 Dead" }*/
+              C1: { t:"s", v:"Assay Date" },
+              D1: { t:"s", v:"Genus" },
+              E1: { t:"s", v:"Insecticide" },
+              F1: { t:"s", v:"Dose (ug)" },
+              G1: { t:"s", v:"Bottle No." },
+              H1: { t:"s", v:"T0 Alive" },
+              I1: { t:"s", v:"T0 Dead" },          
+              J1: { t:"s", v:"T15 Alive" },
+              K1: { t:"s", v:"T15 Dead" },
+              L1: { t:"s", v:"T30 Alive" },
+              M1: { t:"s", v:"T30 Dead" },
+              N1: { t:"s", v:"T45 Alive" },
+              O1: { t:"s", v:"T45 Dead" },
+              P1: { t:"s", v:"T60 Alive" },
+              Q1: { t:"s", v:"T60 Dead" },
+              R1: { t:"s", v:"T75 Alive" },
+              S1: { t:"s", v:"T75 Dead" },
+              T1: { t:"s", v:"T90 Alive" },
+              U1: { t:"s", v:"T90 Dead" },
+              V1: { t:"s", v:"T105 Alive" },
+              W1: { t:"s", v:"T105 Dead" },
+              X1: { t:"s", v:"T120 Alive" },
+              Y1: { t:"s", v:"T120 Dead" }
 
           }
       }
@@ -227,8 +242,10 @@ function writeXLSX2(enterButton,newFile){
   }
   XLSX.writeFile(wb, "sheetjs.xlsx");
 };
-
 //**************************************************************
+
+
+
 
 //input_dom_element.addEventListener('change', handleFile, false);
 });

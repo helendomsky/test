@@ -33,8 +33,6 @@
     			<label for="oldfilename">File Location: </label>
   				<input type="file" id="oldfilename" name="hidden">
 
-  				<!--here should be hidden-->
-
   			</div>	
 
   			<div id="newck">
@@ -58,7 +56,27 @@
   			<br>
   			<div>
   				<label for="installation">Installation: </label>
-  				<input type="text" id="installation">
+  				<input type="text" id="installation"><br>
+
+  				<label for="add_inst_info">Add Installation Properties: </label>
+  				<input type="checkbox" id="add_inst_info"><br>
+  				<div id="installation_info">
+  					<label for="citytown">City/Town: </label>
+  					<input type="text" id="citytown">
+
+  					<label for="county">County: </label>
+  					<input type="text" id="county">
+
+  					<label for="CONUSstate">State: </label>
+  					<input type="text" id="CONUSstate">
+
+
+
+  				</div>
+
+  				</div>
+
+
   			</div>  			
   			<br>
   			<div>
@@ -85,7 +103,7 @@
 	  			<div><label for="numdead">Dead: </label><input type="number" id="numdead" min="0"></div>
 	  			<div><label for="see_stats">Show Stats? </label><input type="checkbox" id="see_stats" value="Show Stats" name="stat"></div>
 
-	    		<div><input type="submit" value="ENTER"></div>
+	    		<div><button type="button" id="addentrybutton">Add Entry</button><div id="entry_info"></div>
 	  		</div>
 
   			
