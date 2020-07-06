@@ -2,7 +2,8 @@
 My first project
 
 ![](pic1.png)
-![](UI%20demo%201.gif)![](demo2.gif)
+![](UI%20demo%201.gif)
+![](demo2.gif)
 
 
 How to use:
