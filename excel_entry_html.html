@@ -6,115 +6,133 @@
 <html lang="en-US">
   <head>
   	
+  
   	<script src="http://cdn.jsdelivr.net/alasql/0.3/alasql.min.js"></script>
    	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
    	<script src="sheetjs-master/dist/xlsx.full.min.js"></script>
   	<script src="handle_hidden.js"></script>
-
+  	<link rel="stylesheet" type="text/css" href="excel_entry_style.css">
 
 
   </head>
 
   <body>
+  	<style>
 
+  	</style>
   	<meta charset="utf-8">
   	<title>Bottle Assay Excel File</title>
 
     <form name="excel_filler" method="post" action="#">
-    	<div id="initial_form_stuff">
-    		<p>Are you...<br></p>
+    	<p class="grouper">File Settings<br></p>
+		<div class="check-parent">
     		<div id="oldck">
-    			<label for="checker">Accessing an existing .xlsx file?</label>
+    			<label for="checker">📃 Accessing an existing .xlsx file?</label>
   				<input type="checkbox" id="checker" name="oldck">
 
   			</div> 
 
-    		<div id="hiddenbit">
+    		<div id="hiddenbit" class="reveal-panel">
     			<label for="oldfilename">File Location: </label>
   				<input type="file" id="oldfilename" name="hidden">
 
   			</div>	
+	  	</div>
 
-  			<div id="newck">
-  				<br>
-    			<label for="checker2">Creating a new file?</label>
-  				<input type="checkbox" id="checker2" name="newck">
+		<div id="newck">		
+			<label for="checker2">📝 Creating a new file?</label>
+					<input type="checkbox" id="checker2" name="newck">
+		</div>
 
-  			</div>
+		<div id="hiddenbit2">
+			<label for="newfilename">New Filename: </label>
+			<input type="text" id="newfilename" name="newfile2">
+			<button id="enter_filename">Create New File</button>
+		</div>
+		<br>
+		<div id="today">
+			<label for="date">📅 Date: </label>
+			<input type="date" id="date" name="datefill">
+		</div>
+		
+		<br>
+		
+		<div id="all_location_info">
+			<p class="grouper">Location Data</p>
+			<label for="installation">📍 Installation: </label>
+			<input type="text" id="installation"><br>
 
-    		<div id="hiddenbit2">
-    			<label for="newfilename">New Filename: </label>
-  				<input type="text" id="newfilename" name="newfile2">
-  				<button id="enter_filename">Create New File</button>
-  			</div>
-  			<br>
-  			<div id="today">
-  				<label for="date">Date: </label>
-  				<input type="date" id="date" name="datefill">
-  			</div>
-  			
-  			<br>
-  			<div>
-  				<label for="installation">Installation: </label>
-  				<input type="text" id="installation"><br>
+			<label for="add_inst_info">🗺 Add Installation Properties: </label>
+			<input type="checkbox" id="add_inst_info"><br>
+			<div id="installation_info">
+				<label for="citytown">City/Town: </label>
+				<input type="text" id="citytown">
 
-  				<label for="add_inst_info">Add Installation Properties: </label>
-  				<input type="checkbox" id="add_inst_info"><br>
-  				<div id="installation_info">
-  					<label for="citytown">City/Town: </label>
-  					<input type="text" id="citytown">
+				<label for="county">County: </label>
+				<input type="text" id="county">
 
-  					<label for="county">County: </label>
-  					<input type="text" id="county">
+				<label for="CONUSstate">State: </label>
+				<input type="text" id="CONUSstate">
+			</div>
 
-  					<label for="CONUSstate">State: </label>
-  					<input type="text" id="CONUSstate">
+			<div id="num_sites">
+				<label for="sites">Number of Sites: </label>
+				<input id="sites" type="number" min="0">
+			</div>
 
+		</div>
 
+		<br>
+		
+		<div id="all_exp_info">
+			<p class="grouper">Assay Data</p>
+			<div>
+				<label for="genus">🦟 Genus: </label>
+				<input type="text" id="genus">
+			</div>
 
-  				</div>
+			<br>
+			
+			<div>
+				<label for="insecticide">🧪 Insecticide (&micro;g): </label>
+				<input type="text" id="insecticide">
+			</div>
 
-  				</div>
+			<br>
 
+			<div id="num_bottles">
+				<label for="bottles">Number of bottles (not incl. control): </label>
+				<input id="bottles" type="number" min="0">
+			</div>
 
-  			</div>  			
-  			<br>
-  			<div>
-  				<label for="genus">Genus: </label>
-  				<input type="text" id="genus">
-  			</div>
-  			<br>
-  			<div>
-  				<label for="insecticide">Insecticide: </label>
-  				<input type="text" id="insecticide">
-  			</div>
-  			<br>
-  			<div>
-  				<label for="bottlepop">Mosquitoes at T0: </label>
-  				<input type="number" id="bottlepop" name="totalM" min=1>
-  			</div>
+		</div>
 
-  			<br>
+		<br>
 
-  			<div id = "mort_stats">
+				<div>
+					<label for="bottlepop">⏱️ Mosquitoes at T0: </label>
+					<input type="number" id="bottlepop" name="totalM" min=1>
+				</div>
+
+				<br>
+
+				<div id = "mort_stats">
 	  			<div id="slider"><label for="mortslider">Mortality:</label><input type="range" id="mortslider" name="Mortality" min="0" max="10"></div>
 
 	  			<div><label for="numalive">Live: </label><input type="number" id="numalive" min="0"></div>
 	  			<div><label for="numdead">Dead: </label><input type="number" id="numdead" min="0"></div>
-	  			<div><label for="see_stats">Show Stats? </label><input type="checkbox" id="see_stats" value="Show Stats" name="stat"></div>
+	  			<div><label for="see_stats">🔣 Show Stats? </label><input type="checkbox" id="see_stats" value="Show Stats" name="stat"></div>
 
-	    		<div><button type="button" id="addentrybutton">Add Entry</button><div id="entry_info"></div>
+	    		<div><button type="button" id="addentrybutton">💾 Add Entry</button><div id="entry_info"></div>
 	  		</div>
 
-  			
+				
 
-  			<div id="stat_info">...</div>
+			<div id="stat_info">...</div>
 
+		</div>
 
-
-
-  			<div><br><br><br><button onclick="window.print()">Print this page</button></div>
-    	</div>
+		<div><br><br><br><button onclick="window.print()">🐾 Print this page 🐾</button></div>
 	<!-- Form Objects go here -->
 	</form>
 
@@ -122,7 +140,9 @@
 		
 	</div>
 
-
+	<div id="bugtxt">🐛</div>
+	<div id="bug1" >🐛</div>
+	<div id="bug2">🦋</div>
   </body>
 </html>
 

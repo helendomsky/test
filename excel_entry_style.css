@@ -1,0 +1,32 @@
+
+body{
+background-color: honeydew;
+color: darkslategray;
+}
+
+/*
+How to assign style by div id:
+
+#oldck{
+	background-color: blue;
+	color: white;
+}
+
+#mort_stats{
+	color: lightgrey;
+}
+
+etc. etc.
+
+*/
+.grey{
+	background-color: beige;
+	color: darkslategray;	
+}
+
+.grouper{
+	color: black;
+	font-weight: bold;
+	font-size: 18px;
+
+}

@@ -2,12 +2,15 @@
   //var alive_dead = $("#mortslider");
   //var Live = $("#numalive");
   //var Dead = $("#numdead");
+  //JS-JQ can select elements based on CSS class, like so:
+  //  var JQselect = $("CSS_class_name")
 
 $(function() {
 
   showOnChange("#checker","#hiddenbit");
   showOnChange("#checker2","#hiddenbit2");
   showOnChange("#add_inst_info","#installation_info")
+  toggleOnClick("#bugtxt","#bug1","#bug2")
   showOnKeydown("#bottlepop","#mort_stats","#mortslider")
   handleRatios("#mortslider","#numalive","#numdead")
   handleRatiosfromText("#mortslider","#numalive","#numdead")
@@ -17,7 +20,7 @@ $(function() {
 
   readXLSX("#oldfilename")
 
-  writeXLSX2("#enter_filename","#newfilename","#installation")
+  var workbook = writeXLSX2("#enter_filename","#newfilename","#installation")
 
   showAddEntry("#addentrybutton","#entry_info")
 
@@ -38,10 +41,13 @@ function showOnChange(checkbox,hidden){
   var ck = $(checkbox);
   var hd = $(hidden);  
 
+
   hd.hide();
 
   ck.change(function() {
+    console.log($(this));
     if (ck.is(':checked')) {
+      hd.addClass("grey");
       hd.show();
 
     } else {
@@ -60,6 +66,7 @@ function showOnKeydown(inText,hidden,slider){
   hd.hide();
 
     txt.on("keydown change",function() {
+      hd.addClass("grey");
       hd.show();
       //document.getElementById("mortality").max = txt.val();
       mort.attr("max",txt.val());
@@ -71,9 +78,30 @@ function showAddEntry(enterButton,output){
   var otpt = $(output);
   var int = 1
   btn.on("click",function(){
-    otpt.text("Entry no. "+int+" has been added");
+    otpt.text("Entry no. "+int+" has been added 💡");
     int++
     //console.log(otpt.text());
+  });
+};
+//**************************************************************
+function toggleOnClick(initial,toggle1,toggle2){
+  var init = $(initial);
+  var tog1 = $(toggle1);
+  var tog2 = $(toggle2);
+
+  tog1.hide();
+  tog2.hide();
+
+  init.on("click",function() {
+    
+    if (init.text()==tog1.text()) {
+      init.text(tog2.text());
+    }
+    else {
+      init.text(tog1.text());
+    }
+
+
   });
 };
 //**************************************************************
@@ -189,73 +217,76 @@ function writeXLSX2(createNewButton,newFileName,instName){
   //single line, all labels
   var create = $(createNewButton)
 
-create.on("click",function(){ 
-  
-  var wb_name = $(newFileName)
-  var sh_name = $(instName)
+  create.on("click",function(){ 
+    
+    var wb_name = $(newFileName)
+    var sh_name = $(instName)
 
-  
+    
 
-  var wb = {
-      SheetNames: [sh_name.val()],
-      Sheets: {}
-  }
-  var obj = wb.Sheets;
-  var prop_name = sh_name.val();
+    var wb = {
+        SheetNames: [sh_name.val()],
+        Sheets: {}
+    }
+    var obj = wb.Sheets;
+    var prop_name = sh_name.val();
 
-  obj[prop_name] = {
-              "!ref":"A1:Y1",
-              A1: { t:"s", v:"Installation" },
-              B1: { t:"s", v:"Site Number" },
-              C1: { t:"s", v:"Assay Date" },
-              D1: { t:"s", v:"Genus" },
-              E1: { t:"s", v:"Insecticide" },
-              F1: { t:"s", v:"Dose (ug)" },
-              G1: { t:"s", v:"Bottle No." },
-              H1: { t:"s", v:"T0 Alive" },
-              I1: { t:"s", v:"T0 Dead" },          
-              J1: { t:"s", v:"T15 Alive" },
-              K1: { t:"s", v:"T15 Dead" },
-              L1: { t:"s", v:"T30 Alive" },
-              M1: { t:"s", v:"T30 Dead" },
-              N1: { t:"s", v:"T45 Alive" },
-              O1: { t:"s", v:"T45 Dead" },
-              P1: { t:"s", v:"T60 Alive" },
-              Q1: { t:"s", v:"T60 Dead" },
-              R1: { t:"s", v:"T75 Alive" },
-              S1: { t:"s", v:"T75 Dead" },
-              T1: { t:"s", v:"T90 Alive" },
-              U1: { t:"s", v:"T90 Dead" },
-              V1: { t:"s", v:"T105 Alive" },
-              W1: { t:"s", v:"T105 Dead" },
-              X1: { t:"s", v:"T120 Alive" },
-              Y1: { t:"s", v:"T120 Dead" }
+    obj[prop_name] = {
+                "!ref":"A1:Y1",
+                A1: { t:"s", v:"Installation" },
+                B1: { t:"s", v:"Site Number" },
+                C1: { t:"s", v:"Assay Date" },
+                D1: { t:"s", v:"Genus" },
+                E1: { t:"s", v:"Insecticide" },
+                F1: { t:"s", v:"Dose (ug)" },
+                G1: { t:"s", v:"Bottle No." },
+                H1: { t:"s", v:"T0 Alive" },
+                I1: { t:"s", v:"T0 Dead" },          
+                J1: { t:"s", v:"T15 Alive" },
+                K1: { t:"s", v:"T15 Dead" },
+                L1: { t:"s", v:"T30 Alive" },
+                M1: { t:"s", v:"T30 Dead" },
+                N1: { t:"s", v:"T45 Alive" },
+                O1: { t:"s", v:"T45 Dead" },
+                P1: { t:"s", v:"T60 Alive" },
+                Q1: { t:"s", v:"T60 Dead" },
+                R1: { t:"s", v:"T75 Alive" },
+                S1: { t:"s", v:"T75 Dead" },
+                T1: { t:"s", v:"T90 Alive" },
+                U1: { t:"s", v:"T90 Dead" },
+                V1: { t:"s", v:"T105 Alive" },
+                W1: { t:"s", v:"T105 Dead" },
+                X1: { t:"s", v:"T120 Alive" },
+                Y1: { t:"s", v:"T120 Dead" }
 
-          };
-  XLSX.writeFile(wb, (wb_name.val()+".xlsx"));
-  /*
-  //multiple lines
-  var myObject = [];
-
-  for (let col=1; col< 3; col++) {
-      for(let row=1; row< 10; row++ ) {
-          myObject['A' + row] = {t: "s", v: 'hi A' + row};
-          myObject['B' + row] = {t: "s", v: 'hi B' + row};
-          myObject['C' + row] = {t: "s", v: 'hi C' + row};
-      }
-  } 
-
-  var wb = {
-      SheetNames: [sh_name],
-      Sheets: {
-          mySheet: myObject
-      }
-  }
-  XLSX.writeFile(wb, wb_name);*/
-  });
+            };
+    //THIS EXPORTS THE FILE:
+    XLSX.writeFile(wb, (wb_name.val()+".xlsx"));
+    });
+  //return <WORKBOOK OBJECT>
 };
 //**************************************************************
+function appendXLSX(){
 
+    //multiple lines9
+    var myObject = [];
+
+    for (let col=1; col< 3; col++) {
+        for(let row=1; row< 10; row++ ) {
+            myObject['A' + row] = {t: "s", v: 'hi A' + row};
+            myObject['B' + row] = {t: "s", v: 'hi B' + row};
+            myObject['C' + row] = {t: "s", v: 'hi C' + row};
+        }
+    } 
+
+    var wb = {
+        SheetNames: [sh_name],
+        Sheets: {
+            mySheet: myObject
+        }
+    }
+    XLSX.writeFile(wb, wb_name);
+};
 
 
 
