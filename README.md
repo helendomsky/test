@@ -1,6 +1,7 @@
 # test
 My first project
 
+![](pic1.gif)
 ![](UI%20demo%201.gif)![](demo2.gif)
 
 
