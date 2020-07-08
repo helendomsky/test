@@ -30,3 +30,23 @@ etc. etc.
 	font-size: 18px;
 
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 225px auto;
+  grid-template-areas: 
+  	"header header"
+    "sidebar mainbit"
+}
+
+.header{
+	grid-area: header;
+}
+
+.sidebar{
+	grid-area: sidebar;
+}
+
+.content{
+	grid-area: mainbit;
+}
